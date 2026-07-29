@@ -1,42 +1,21 @@
 name: dbt CI/CD Data Quality Checks
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   dbt_run_and_test:
-    name: Run dbt models and data tests
     runs-on: ubuntu-latest
-    
     env:
       DBT_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       DBT_SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
       DBT_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
       DBT_SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.DBT_SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
-      DBT_PROFILES_DIR: ./dbt_ecommerce
-
+    
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Install dbt-snowflake
-        run: pip install dbt-snowflake==1.7.3
-
-      - name: Install dbt dependencies
-        run: dbt deps --project-dir dbt_ecommerce
-
-      - name: Compile dbt models
-        run: dbt compile --project-dir dbt_ecommerce
-        
-      - name: Run dbt Data Tests
-        run: dbt test --project-dir dbt_ecommerce
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: {python-version: '3.11'}
+      - run: pip install dbt-snowflake==1.7.3
+      # We define the project dir here once
+      - run: dbt deps --project-dir dbt_ecommerce
+      - run: dbt compile --project-dir dbt_ecommerce
+      - run: dbt test --project-dir dbt_ecommerce
