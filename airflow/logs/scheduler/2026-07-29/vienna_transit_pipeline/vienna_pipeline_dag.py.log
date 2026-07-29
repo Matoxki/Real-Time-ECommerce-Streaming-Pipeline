@@ -3117,3 +3117,24 @@
 [2026-07-29T19:30:15.066+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:15.066+0000] {dag.py:3211} INFO - Sync 1 DAGs
 [2026-07-29T19:30:15.080+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:15.080+0000] {dag.py:4138} INFO - Setting next_dagrun for vienna_mobility_weather_pipeline to 2026-07-29 00:00:00+00:00, run_after=2026-07-30 00:00:00+00:00
 [2026-07-29T19:30:15.090+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py took 0.054 seconds
+[2026-07-29T19:30:45.183+0000] {processor.py:186} INFO - Started process (PID=28551) to work on /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:30:45.184+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py for tasks to queue
+[2026-07-29T19:30:45.187+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:45.187+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:30:45.196+0000] {processor.py:925} INFO - DAG(s) 'vienna_mobility_weather_pipeline' retrieved from /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:30:45.215+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:45.215+0000] {dag.py:3211} INFO - Sync 1 DAGs
+[2026-07-29T19:30:45.225+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:45.225+0000] {dag.py:4138} INFO - Setting next_dagrun for vienna_mobility_weather_pipeline to 2026-07-29 00:00:00+00:00, run_after=2026-07-30 00:00:00+00:00
+[2026-07-29T19:30:45.235+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py took 0.056 seconds
+[2026-07-29T19:31:15.307+0000] {processor.py:186} INFO - Started process (PID=28617) to work on /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:31:15.309+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py for tasks to queue
+[2026-07-29T19:31:15.312+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:15.312+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:31:15.324+0000] {processor.py:925} INFO - DAG(s) 'vienna_mobility_weather_pipeline' retrieved from /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:31:15.341+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:15.341+0000] {dag.py:3211} INFO - Sync 1 DAGs
+[2026-07-29T19:31:15.355+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:15.355+0000] {dag.py:4138} INFO - Setting next_dagrun for vienna_mobility_weather_pipeline to 2026-07-29 00:00:00+00:00, run_after=2026-07-30 00:00:00+00:00
+[2026-07-29T19:31:15.365+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py took 0.063 seconds
+[2026-07-29T19:31:46.261+0000] {processor.py:186} INFO - Started process (PID=28683) to work on /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:31:46.261+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py for tasks to queue
+[2026-07-29T19:31:46.264+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:46.264+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:31:46.272+0000] {processor.py:925} INFO - DAG(s) 'vienna_mobility_weather_pipeline' retrieved from /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py
+[2026-07-29T19:31:46.285+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:46.284+0000] {dag.py:3211} INFO - Sync 1 DAGs
+[2026-07-29T19:31:46.297+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:46.297+0000] {dag.py:4138} INFO - Setting next_dagrun for vienna_mobility_weather_pipeline to 2026-07-29 00:00:00+00:00, run_after=2026-07-30 00:00:00+00:00
+[2026-07-29T19:31:46.308+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/vienna_transit_pipeline/vienna_pipeline_dag.py took 0.051 seconds

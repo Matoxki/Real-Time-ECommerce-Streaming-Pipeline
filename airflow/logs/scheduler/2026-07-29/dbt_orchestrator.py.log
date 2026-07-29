@@ -3117,3 +3117,24 @@
 [2026-07-29T19:30:15.066+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:15.066+0000] {dag.py:3211} INFO - Sync 1 DAGs
 [2026-07-29T19:30:15.082+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:15.082+0000] {dag.py:4138} INFO - Setting next_dagrun for ecommerce_dbt_transformation to 2026-07-29 19:00:00+00:00, run_after=2026-07-29 20:00:00+00:00
 [2026-07-29T19:30:15.094+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dbt_orchestrator.py took 0.062 seconds
+[2026-07-29T19:30:45.179+0000] {processor.py:186} INFO - Started process (PID=28550) to work on /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:30:45.180+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dbt_orchestrator.py for tasks to queue
+[2026-07-29T19:30:45.182+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:45.182+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:30:45.190+0000] {processor.py:925} INFO - DAG(s) 'ecommerce_dbt_transformation' retrieved from /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:30:45.204+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:45.204+0000] {dag.py:3211} INFO - Sync 1 DAGs
+[2026-07-29T19:30:45.219+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:30:45.219+0000] {dag.py:4138} INFO - Setting next_dagrun for ecommerce_dbt_transformation to 2026-07-29 19:00:00+00:00, run_after=2026-07-29 20:00:00+00:00
+[2026-07-29T19:30:45.230+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dbt_orchestrator.py took 0.057 seconds
+[2026-07-29T19:31:15.306+0000] {processor.py:186} INFO - Started process (PID=28616) to work on /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:31:15.307+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dbt_orchestrator.py for tasks to queue
+[2026-07-29T19:31:15.311+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:15.311+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:31:15.324+0000] {processor.py:925} INFO - DAG(s) 'ecommerce_dbt_transformation' retrieved from /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:31:15.339+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:15.339+0000] {dag.py:3211} INFO - Sync 1 DAGs
+[2026-07-29T19:31:15.354+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:15.354+0000] {dag.py:4138} INFO - Setting next_dagrun for ecommerce_dbt_transformation to 2026-07-29 19:00:00+00:00, run_after=2026-07-29 20:00:00+00:00
+[2026-07-29T19:31:15.366+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dbt_orchestrator.py took 0.068 seconds
+[2026-07-29T19:31:46.258+0000] {processor.py:186} INFO - Started process (PID=28682) to work on /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:31:46.258+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/dbt_orchestrator.py for tasks to queue
+[2026-07-29T19:31:46.260+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:46.260+0000] {dagbag.py:587} INFO - Filling up the DagBag from /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:31:46.272+0000] {processor.py:925} INFO - DAG(s) 'ecommerce_dbt_transformation' retrieved from /opt/airflow/dags/dbt_orchestrator.py
+[2026-07-29T19:31:46.284+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:46.284+0000] {dag.py:3211} INFO - Sync 1 DAGs
+[2026-07-29T19:31:46.296+0000] {logging_mixin.py:190} INFO - [2026-07-29T19:31:46.296+0000] {dag.py:4138} INFO - Setting next_dagrun for ecommerce_dbt_transformation to 2026-07-29 19:00:00+00:00, run_after=2026-07-29 20:00:00+00:00
+[2026-07-29T19:31:46.309+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/dbt_orchestrator.py took 0.055 seconds
