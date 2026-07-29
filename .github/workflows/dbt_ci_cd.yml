@@ -1,15 +1,24 @@
-name: dbt CI/CD Pipeline
+name: dbt CI/CD Data Quality Checks
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
-    branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  dbt-build-and-test:
-    name: "Run dbt Models and Tests"
+  dbt_run_and_test:
+    name: Run dbt models and data tests
     runs-on: ubuntu-latest
+    
+    env:
+      DBT_SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      DBT_SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      DBT_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+      DBT_SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.DBT_SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
+      DBT_PROFILES_DIR: ./dbt_ecommerce
 
     steps:
       - name: Checkout Repository
@@ -18,22 +27,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Install dbt and Snowflake connector
-        run: |
-          pip install dbt-core dbt-snowflake
+      - name: Install dbt-snowflake
+        run: pip install dbt-snowflake==1.7.3
 
-      - name: Run dbt deps
+      - name: Install dbt dependencies
         run: dbt deps --project-dir dbt_ecommerce
-        env:
-          DBT_PROFILES_DIR: ./
 
-      # Runs only the models that were modified in the pull request
-      - name: Run dbt build (Slim CI)
-        run: dbt build --select state:modified+ --project-dir dbt_ecommerce
-        env:
-          DBT_PROFILES_DIR: ./
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-          SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+      - name: Compile dbt models
+        run: dbt compile --project-dir dbt_ecommerce
+        
+      - name: Run dbt Data Tests
+        run: dbt test --project-dir dbt_ecommerce
