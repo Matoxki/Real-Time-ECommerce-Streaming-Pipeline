@@ -1,0 +1,12 @@
+.# Local Secrets
+.env
+
+# Python Environments & Cache
+venv/
+__pycache__/
+
+# dbt Dependencies
+dbt_modules/
+# Ignore Snowflake RSA Keys
+*.p8
+*.pub

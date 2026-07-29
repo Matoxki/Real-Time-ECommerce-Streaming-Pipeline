@@ -1,0 +1,26 @@
+# Name your project! Project names should contain only lowercase characters and underscores
+name: 'dbt_ecommerce'
+version: '1.0.0'
+config-version: 2
+
+# This tells dbt to look in your profiles.yml for the 'dbt_ecommerce' credentials
+profile: 'dbt_ecommerce'
+
+# These configurations specify where dbt should look for different types of files
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+# Configuring models
+models:
+  dbt_ecommerce:
+    # This applies a default materialization of 'view' to all models in your project
+    +materialized: view

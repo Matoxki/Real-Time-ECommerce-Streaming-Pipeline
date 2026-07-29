@@ -1,0 +1,9 @@
+# sources.yml
+version: 2
+
+sources:
+  - name: raw_ecommerce          # A logical name for this source in dbt
+    database: ECOMMERCE_DB       # The Snowflake database
+    schema: RAW                  # The Snowflake schema where Kafka drops the data
+    tables:
+      - name: raw_clicks         # The exact table name Snowpipe is writing to

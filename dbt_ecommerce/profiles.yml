@@ -1,0 +1,13 @@
+dbt_ecommerce:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: hivdvcx-af38568
+      user: matoxki
+      private_key_path: "/opt/airflow/dbt_ecommerce/rsa_key.p8"
+      role: ACCOUNTADMIN
+      database: ECOMMERCE_DB
+      warehouse: COMPUTE_WH
+      schema: dev_matoxki
+      threads: 4
