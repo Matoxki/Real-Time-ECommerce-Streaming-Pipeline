@@ -25,13 +25,13 @@ jobs:
           pip install dbt-core dbt-snowflake
 
       - name: Run dbt deps
-        run: dbt deps
+        run: dbt deps --project-dir dbt_ecommerce
         env:
           DBT_PROFILES_DIR: ./
 
       # Runs only the models that were modified in the pull request
       - name: Run dbt build (Slim CI)
-        run: dbt build --select state:modified+
+        run: dbt build --select state:modified+ --project-dir dbt_ecommerce
         env:
           DBT_PROFILES_DIR: ./
           SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
