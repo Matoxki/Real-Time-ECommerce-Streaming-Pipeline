@@ -10,3 +10,13 @@ dbt_modules/
 # Ignore Snowflake RSA Keys
 *.p8
 *.pub
+
+airflow/logs/
+airflow/dags/__pycache__/
+airflow/dags/*/__pycache__/
+
+# Ignore dbt compilation and target files
+dbt_ecommerce/target/
+dbt_ecommerce/dbt_packages/
+dbt_ecommerce/logs/
+dbt_ecommerce/.DS_Store

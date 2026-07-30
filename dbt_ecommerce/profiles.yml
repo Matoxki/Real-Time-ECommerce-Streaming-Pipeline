@@ -5,9 +5,9 @@ dbt_ecommerce:
       type: snowflake
       account: hivdvcx-af38568
       user: matoxki
-      private_key_path: "/opt/airflow/dbt_ecommerce/rsa_key.p8"
       role: ACCOUNTADMIN
       database: ECOMMERCE_DB
       warehouse: COMPUTE_WH
       schema: dev_matoxki
       threads: 4
+      private_key_path: "{{ env_var('DBT_RSA_KEY_PATH', '/Users/matoxki/Documents/ecommerce_streaming_pipeline/dbt_ecommerce/rsa_key.p8') }}"

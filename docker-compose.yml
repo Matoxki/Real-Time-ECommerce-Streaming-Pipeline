@@ -30,6 +30,8 @@ x-airflow-common:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+    # Added variable to automate Snowflake RSA key pathing in Docker
+    DBT_RSA_KEY_PATH: '/opt/airflow/dbt_ecommerce/rsa_key.p8'
   volumes:
     # 1. Standard Airflow paths mapped to your local folders
     - ./airflow/dags:/opt/airflow/dags

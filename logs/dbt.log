@@ -10,3 +10,19 @@
 [0m11:27:58.884514 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a1ed0f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a3720f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a3e9260>]}
 [0m11:27:58.884685 [debug] [MainThread]: Flushing usage events
 [0m11:27:59.515724 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:19:20.025590 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10aa0d160>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c106710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c106990>]}
+
+
+============================== 01:19:20.028176 | e10b1e48-c3a1-433e-899e-b857dd16e8ff ==============================
+[0m01:19:20.028176 [info ] [MainThread]: Running with dbt=1.12.0
+[0m01:19:20.028437 [debug] [MainThread]: running dbt with arguments {'invocation_command': 'dbt run --select mart_abandoned_carts', 'send_anonymous_usage_stats': 'True', 'maximum_seed_size_mib': '1', 'empty': 'False', 'version_check': 'True', 'cache_selected_only': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'fail_fast': 'False', 'log_cache_events': 'False', 'target_path': 'None', 'indirect_selection': 'eager', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'static_parser': 'True', 'log_format': 'default', 'warn_error': 'None', 'log_path': 'logs', 'introspect': 'True', 'hints_enabled': 'True', 'partial_parse': 'True', 'write_json': 'True', 'debug': 'False', 'printer_width': '80', 'quiet': 'False', 'profiles_dir': '/Users/matoxki/.dbt'}
+[0m01:19:20.028706 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /Users/matoxki/Documents/ecommerce_streaming_pipeline/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m01:19:20.030209 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.046060417, "process_in_blocks": "0", "process_kernel_time": 0.134315, "process_mem_max_rss": "131383296", "process_out_blocks": "0", "process_user_time": 0.512957}
+[0m01:19:20.030399 [debug] [MainThread]: Command `dbt run` failed at 01:19:20.030365 after 0.05 seconds
+[0m01:19:20.030522 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf52c40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c13d910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c149ae0>]}
+[0m01:19:20.030633 [debug] [MainThread]: Flushing usage events
+[0m01:19:20.678667 [debug] [MainThread]: An error was encountered while trying to flush usage events
