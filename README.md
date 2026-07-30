@@ -1,7 +1,7 @@
-                                                                        # Real-Time E-Commerce Streaming Pipeline
-                                                            ## Cart Abandonment Engine using Kafka, Snowflake, dbt & Airflow ##
+# Real-Time E-Commerce Streaming Pipeline
+## Cart Abandonment Engine using Kafka, Snowflake, dbt & Airflow ##
 
-                                                                        ![Project Architecture Diagram](images/Archi.png)
+![Project Architecture Diagram](images/Archi.png)
 
 ## The Business Problem (The "Why")
 In e-commerce, time is revenue. When a customer adds items to their cart but leaves the website without purchasing, sending a follow-up email 24 hours later often yields poor conversion rates. Businesses need to identify abandoned carts the moment a user's session goes cold, enabling immediate, targeted re-engagement while the purchase intent is still high. 
