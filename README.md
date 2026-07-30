@@ -24,7 +24,7 @@ Building upon the batch-processing concepts I utilized in previous data models, 
 
 ### 1. The Streaming Layer (Confluent Kafka)
 Raw clickstream data is generated continuously and pushed to an Apache Kafka topic.
-![Kafka Topic Stream](images/Kafka_Topics_-_Raw_Clicks.png)
+![Kafka Topic Stream](images/Kafka_Topics.png)
 
 A managed Confluent Sink Connector then continuously streams this data directly into Snowflake.
 ![Confluent to Snowflake Connector](images/Confluent_connector.png)
@@ -34,7 +34,7 @@ Once the raw JSON hits Snowflake, dbt executes a Medallion Architecture (Bronze 
 ![dbt Lineage Graph](images/dbt_Chart.png)
 
 The `fact_customer_sessions` table aggregates multiple isolated events into coherent sessions, calculating session duration and tracking conversion metrics.
-![Snowflake Fact Table Results](images/DEV_MATOXI._FACT_CUSTOMER_SESSIONS.png)
+![Snowflake Fact Table Results](images/DEV.png)
 
 ### 3. The Orchestration Layer (Apache Airflow)
 The entire dbt pipeline is orchestrated via Apache Airflow running in Docker, ensuring transformations happen on a reliable schedule.
