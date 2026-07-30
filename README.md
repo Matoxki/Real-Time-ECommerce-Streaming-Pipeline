@@ -1,52 +1,94 @@
 # Real-Time E-Commerce Streaming Pipeline
-## Cart Abandonment Engine using Kafka, Snowflake, dbt & Airflow ##
 
-![Project Architecture Diagram](images/Archi.png)
+> **Cart Abandonment Engine using Kafka, Snowflake, dbt & Airflow**
 
-## The Business Problem (The "Why")
-In e-commerce, time is revenue. When a customer adds items to their cart but leaves the website without purchasing, sending a follow-up email 24 hours later often yields poor conversion rates. Businesses need to identify abandoned carts the moment a user's session goes cold, enabling immediate, targeted re-engagement while the purchase intent is still high. 
+![Architecture](images/Archi.png)
 
-Traditional batch processing architectures are too slow for this. To solve it, I engineered a real-time streaming pipeline that identifies abandoned carts within a defined SLA time window.
+## Overview
 
-## The Solution (The "How")
-This project simulates live e-commerce traffic, ingests the data stream continuously, and transforms it into analytics-ready models for marketing teams. 
+This project captures simulated e-commerce clickstream events in real time, streams them through Apache Kafka on Confluent Cloud, and loads the raw JSON into Snowflake through a managed Sink Connector and Snowpipe.
 
-Building upon the batch-processing concepts I utilized in previous data models, this architecture handles the complexities of continuous data streams, dynamic environment pathing, and real-time state management.
+dbt reconstructs individual events into customer sessions and produces `mart_abandoned_carts`, a reverse-ETL-ready view containing non-converted carts that have been inactive for at least 15 minutes. Apache Airflow runs the dbt models and tests hourly.
 
-### Architecture & Tech Stack
-*   **Data Generation:** Python scripts simulating live user clickstream data (page views, cart adds, checkouts).
-*   **Message Broker:** Apache Kafka ingests the high-throughput, continuous stream of events.
-*   **Data Warehouse:** Snowflake serves as the highly scalable target for real-time storage.
-*   **Transformation:** dbt (Data Build Tool) normalizes the JSON payloads and models the raw events into structured user sessions and a final `MART_ABANDONED_CARTS` view based on strict time-gap thresholds (e.g., 15 minutes of inactivity).
-*   **Orchestration:** Dockerized Apache Airflow dynamically manages the execution environment and schedules the dbt transformations.
+## Architecture
 
-## The Data Journey: From Stream to Analytics
+```text
+Python Producer
+      ↓
+Apache Kafka — Confluent Cloud
+      ↓
+Snowflake Sink Connector + Snowpipe
+      ↓
+Snowflake RAW_CLICKS
+      ↓
+stg_clicks
+      ↓
+int_sessions
+      ↓
+fact_customer_sessions
+      ↓
+mart_abandoned_carts
+```
 
-### 1. The Streaming Layer (Confluent Kafka)
-Raw clickstream data is generated continuously and pushed to an Apache Kafka topic.
-![Kafka Topic Stream](images/Kafka_Topics.png)
+## Technology Stack
 
-A managed Confluent Sink Connector then continuously streams this data directly into Snowflake.
-![Confluent to Snowflake Connector](images/Confluent_connector.png)
+- **Python + Faker:** simulated clickstream generation
+- **Kafka + Confluent Cloud:** event streaming
+- **Snowflake + Snowpipe:** continuous warehouse ingestion
+- **dbt + SQL:** JSON parsing, sessionization and marts
+- **Apache Airflow + Docker:** hourly orchestration and testing
+- **RSA key-pair authentication:** secure Snowflake access
 
-### 2. The Transformation Layer (dbt & Snowflake)
-Once the raw JSON hits Snowflake, dbt executes a Medallion Architecture (Bronze to Gold), transforming the raw clicks into structured user sessions. 
-![dbt Lineage Graph](images/dbt_Chart.png)
+## Data Models
 
-The `fact_customer_sessions` table aggregates multiple isolated events into coherent sessions, calculating session duration and tracking conversion metrics.
-![Snowflake Fact Table Results](images/DEV.png)
+| Layer | Model | Purpose |
+|---|---|---|
+| Raw | `RAW_CLICKS` | Kafka metadata and `VARIANT` JSON payloads |
+| Staging | `stg_clicks` | Extract and type-cast event fields |
+| Intermediate | `int_sessions` | Reconstruct sessions with SQL window functions |
+| Gold | `fact_customer_sessions` | One record per customer session |
+| Gold | `mart_abandoned_carts` | Non-converted carts inactive for 15+ minutes |
 
-### 3. The Orchestration Layer (Apache Airflow)
-The entire dbt pipeline is orchestrated via Apache Airflow running in Docker, ensuring transformations happen on a reliable schedule.
-![Airflow DAG Overview](images/Orchestration.png)
+Sessionization uses `LAG()`, `TIMESTAMPDIFF()` and a cumulative windowed `SUM()` to group events separated by a 15-minute inactivity boundary.
 
-Airflow seamlessly manages the dynamic environment variables and successfully executes the models.
-![Airflow DAG Success Logs](images/Airflow_DAG.png)
+## Business Rules
+
+A session is treated as an abandoned cart when:
+
+- At least one `add_to_cart` event occurred.
+- No `purchase_complete` event occurred.
+- The last recorded activity was at least 15 minutes ago.
+
+The final view is ready to be consumed by CRM, email, SMS or retargeting systems. No reverse ETL platform is implemented in the current scope.
+
+## Proof of Execution
+
+### Confluent Cloud
+
+![Confluent Cloud connector](images/Confluent_connector.png)
+
+### dbt Lineage
+
+![dbt lineage](images/dbt_Chart.png)
+
+### Airflow
+
+![Airflow DAG](images/Airflow_DAG.png)
 
 ## Engineering Highlights
-1.  **Sessionization Logic:** Engineered SQL transformations to group individual, asynchronous Kafka events into unified user sessions based on rolling timestamps.
-2.  **Streaming Time Thresholds:** Implemented logic to differentiate active sessions from abandoned sessions by calculating live time differentials (`CURRENT_TIMESTAMP()`) against the most recent event.
-3.  **Dynamic Container Paths:** Configured Docker and Airflow to securely inject dynamic environment variables for Snowflake RSA key authentication, seamlessly bridging local development and containerized orchestration.
 
-## Execution
-This pipeline is fully containerized. A Python producer generates the continuous mock traffic, while Airflow triggers the dbt DAGs to process the live data into Snowflake in near real-time, resulting in a constantly updating list of actionable cart abandonment leads.
+- Continuous Kafka ingestion
+- Managed Kafka-to-Snowflake connector
+- Warehouse-native ELT
+- Gaps-and-islands sessionization
+- 15-minute abandonment rule
+- Hourly dbt execution and tests
+- Dockerized Airflow
+- RSA key-pair authentication
+
+## Author
+
+**Michael Okang Ozeh**
+
+- [LinkedIn](https://www.linkedin.com/in/michael-okang-ozeh)
+- [GitHub](https://github.com/Matoxki)

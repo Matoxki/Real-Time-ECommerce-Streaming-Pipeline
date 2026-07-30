@@ -1,34 +1,58 @@
-WITH customer_sessions AS (
-    SELECT * 
-    FROM {{ ref('fact_customer_sessions') }}
-),
+{{ config(materialized='view') }}
 
--- 2. FILTERING LOGIC
-abandoned_carts AS (
-    SELECT 
+WITH customer_sessions AS (
+    SELECT
         session_id,
         user_id,
         device,
         session_start_time,
         session_end_time,
         session_duration_minutes,
+        total_page_views,
         total_cart_adds,
+        total_checkouts_started,
+        is_converted_session,
+        session_revenue
+    FROM {{ ref('fact_customer_sessions') }}
+),
+
+candidate_carts AS (
+    SELECT
+        session_id,
+        user_id,
+        device,
+        session_start_time,
+        session_end_time,
+        session_duration_minutes,
+        total_page_views,
+        total_cart_adds,
+        total_checkouts_started,
+        is_converted_session,
         session_revenue,
-        
-        -- We calculate the time difference here (This is what was missing!)
-        TIMESTAMPDIFF(MINUTE, session_end_time, CURRENT_TIMESTAMP()) AS minutes_since_last_activity
-        
+
+        TIMESTAMPDIFF(
+            MINUTE,
+            session_end_time,
+            CURRENT_TIMESTAMP()
+        ) AS minutes_since_last_activity
+
     FROM customer_sessions
-    WHERE 
-        -- Rule 1: They must have added at least one item to their cart
+    WHERE
         total_cart_adds > 0
-        
-        -- Rule 2: They must NOT have completed a purchase
-        AND total_checkouts_started = 0 
+        AND is_converted_session = 0
 )
 
--- 3. FINAL OUTPUT
-SELECT * 
-FROM abandoned_carts
--- We keep the filter at 1 minute, and removed the upper bound so older data appears
-WHERE minutes_since_last_activity >= 1
+SELECT
+    session_id,
+    user_id,
+    device,
+    session_start_time,
+    session_end_time,
+    session_duration_minutes,
+    total_page_views,
+    total_cart_adds,
+    total_checkouts_started,
+    session_revenue,
+    minutes_since_last_activity
+FROM candidate_carts
+WHERE minutes_since_last_activity >= 15

@@ -1,22 +1,36 @@
-.# Local Secrets
+# Environment variables and credentials
 .env
+.env.*
+!.env.example
 
-# Python Environments & Cache
-venv/
-__pycache__/
-
-# dbt Dependencies
-dbt_modules/
-# Ignore Snowflake RSA Keys
+# Snowflake / dbt credentials
+dbt_ecommerce/profiles.yml
 *.p8
 *.pub
 
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Airflow generated files
 airflow/logs/
+logs/
 airflow/dags/__pycache__/
 airflow/dags/*/__pycache__/
 
-# Ignore dbt compilation and target files
+# dbt generated files
+dbt_modules/
 dbt_ecommerce/target/
 dbt_ecommerce/dbt_packages/
 dbt_ecommerce/logs/
-dbt_ecommerce/.DS_Store
+
+# Editors
+.vscode/
+.idea/
